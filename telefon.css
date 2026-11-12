@@ -1,0 +1,114 @@
+/* Raport MM – raport operatora na telefon. Kierunek: oznakowanie magazynowe – czerń, biel, żółty ostrzegawczy.
+   Duże pola i przyciski (rękawice), wysoki kontrast (słońce przy rampie). */
+:root {
+  --czern: #16181d;
+  --grafit: #2b2f38;
+  --papier: #f4f2ec;
+  --karta: #ffffff;
+  --linia: #d6d2c6;
+  --zolty: #ffc400;
+  --zielony: #1d7a3e;
+  --czerwony: #b3261e;
+  --szary: #5f636b;
+  --promien: 10px;
+  --dotyk: 52px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--papier); color: var(--czern);
+  font: 17px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  padding-bottom: 140px;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+.ukryte { display: none !important; }
+
+.pasek {
+  position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 10px;
+  background: var(--czern); color: #fff; padding: 10px 16px;
+  box-shadow: 0 6px 0 0 var(--zolty);
+  background-image: repeating-linear-gradient(-45deg, transparent 0 14px, rgba(255,196,0,.12) 14px 28px);
+}
+.logo { width: 18px; height: 18px; background: var(--zolty); border-radius: 3px; }
+.pasek-tytul { font-weight: 800; letter-spacing: .1em; font-size: 15px; }
+
+main { padding: 18px 16px; max-width: 640px; margin: 0 auto; }
+
+.zamowienie { background: var(--karta); border-left: 8px solid var(--zolty); border-radius: var(--promien); padding: 14px 16px; }
+.zamowienie small { font-size: 12px; font-weight: 800; color: var(--szary); letter-spacing: .1em; display: block; }
+.zamowienie .nr { font-size: 32px; font-weight: 900; line-height: 1.1; }
+.zamowienie .odb { font-weight: 700; margin-top: 4px; }
+.zamowienie .dost { color: var(--szary); font-size: 15px; }
+
+h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--szary); margin: 24px 0 8px; }
+
+.produkty { list-style: none; margin: 0; padding: 0; background: var(--karta); border-radius: var(--promien); overflow: hidden; }
+.produkty li { border-bottom: 1px solid var(--linia); }
+.produkty li:last-child { border-bottom: 0; }
+.produkty label { display: grid; grid-template-columns: 34px 1fr auto; gap: 2px 10px; align-items: center; padding: 12px 14px; min-height: var(--dotyk); }
+.produkty input[type=checkbox] { width: 28px; height: 28px; accent-color: var(--czern); grid-row: span 2; }
+.produkty .kod { font-weight: 800; }
+.produkty .nazwa { grid-column: 2; color: var(--szary); font-size: 14px; }
+.produkty .zostalo { grid-row: 1 / span 2; grid-column: 3; text-align: right; font-weight: 800; font-size: 14px; padding: 4px 10px; border-radius: 999px; background: #fff0b8; white-space: nowrap; }
+.zostalo.zero { background: #d9f0e0; color: var(--zielony); }
+.zostalo.za-duzo { background: #fbdcd9; color: var(--czerwony); }
+.produkty .odhaczony .kod, .produkty .odhaczony .nazwa { text-decoration: line-through; opacity: .55; }
+
+.paleta { background: var(--karta); border-radius: var(--promien); margin-bottom: 16px; box-shadow: 0 1px 0 var(--linia), 0 8px 20px rgba(22,24,29,.07); }
+.paleta-gora { display: flex; justify-content: space-between; align-items: center; background: var(--grafit); color: #fff; padding: 6px 6px 6px 16px; border-radius: var(--promien) var(--promien) 0 0; }
+.paleta-gora b { font-size: 20px; font-weight: 900; letter-spacing: .06em; }
+.paleta-srodek { padding: 4px 14px 14px; }
+
+.ladunek { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 0; border-bottom: 1px dashed var(--linia); }
+.ladunek .wybor { grid-column: 1 / -1; }
+.pole { display: flex; flex-direction: column; gap: 3px; font-size: 13px; font-weight: 700; color: var(--szary); }
+select, input[type=number], input[type=text], textarea {
+  width: 100%; min-height: var(--dotyk); border: 2px solid var(--linia); border-radius: 8px; background: #fff;
+  padding: 10px 12px; font-size: 18px; font-weight: 600; color: var(--czern);
+}
+textarea { min-height: 90px; resize: vertical; }
+select:focus, input:focus, textarea:focus { outline: none; border-color: var(--czern); box-shadow: 0 0 0 3px var(--zolty); }
+.ladunek .suma { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-weight: 800; }
+.ladunek .suma .szt { flex: 1; }
+
+.btn {
+  min-height: var(--dotyk); border: 2px solid var(--czern); background: #fff; border-radius: 8px;
+  padding: 8px 16px; font-weight: 800; cursor: pointer; touch-action: manipulation;
+}
+.btn:active { transform: translateY(1px); background: var(--papier); }
+.btn:focus-visible { outline: 3px solid var(--zolty); outline-offset: 2px; }
+.btn.maly { min-height: 44px; padding: 6px 12px; font-size: 15px; }
+.btn.usun { border-color: transparent; background: transparent; color: #fff; font-size: 15px; text-decoration: underline; min-height: 44px; }
+.btn.usun-produkt { border-color: var(--linia); color: var(--czerwony); }
+.btn.szeroki { width: 100%; }
+.btn.dodaj { border-style: dashed; margin-top: 12px; width: 100%; }
+.btn.dodaj-palete { width: 100%; background: var(--czern); color: #fff; font-size: 18px; }
+
+.licznik { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--linia); }
+.licznik .etykieta { font-weight: 800; }
+.licznik .etykieta small { display: block; font-weight: 600; color: var(--szary); font-size: 13px; }
+.stepper { display: flex; align-items: center; gap: 6px; }
+.stepper output { min-width: 40px; text-align: center; font-size: 26px; font-weight: 900; }
+.stepper .btn { width: var(--dotyk); padding: 0; font-size: 26px; line-height: 1; }
+
+.pakowanie { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.pakowanie label { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: var(--dotyk); border: 2px solid var(--linia); border-radius: 8px; font-weight: 800; cursor: pointer; }
+.pakowanie input { width: 22px; height: 22px; accent-color: var(--czern); }
+.pakowanie label:has(input:checked) { border-color: var(--czern); background: var(--zolty); }
+
+.dane-operatora { background: var(--karta); border-radius: var(--promien); padding: 14px; display: grid; gap: 12px; }
+
+.wyslij-pasek { position: fixed; left: 0; right: 0; bottom: 0; padding: 18px 16px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(rgba(244,242,236,0), var(--papier) 35%); }
+.wyslij-pasek .podsumowanie { max-width: 640px; margin: 0 auto 8px; font-size: 14px; font-weight: 800; text-align: center; }
+.wyslij-pasek .btn { width: 100%; max-width: 640px; display: block; margin: 0 auto; min-height: 62px; font-size: 20px; letter-spacing: .04em; text-transform: uppercase; background: var(--zolty); box-shadow: 0 4px 0 var(--czern); }
+.wyslij-pasek .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--czern); }
+
+.info { position: fixed; left: 16px; right: 16px; bottom: 150px; z-index: 10; max-width: 608px; margin: 0 auto; padding: 14px 16px; border-radius: var(--promien); background: var(--czern); color: #fff; font-weight: 700; white-space: pre-line; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.info.blad { background: var(--czerwony); }
+
+.ekran { text-align: center; padding: 48px 12px; }
+.ekran .znak { width: 96px; height: 96px; margin: 0 auto 20px; border: 6px solid var(--czern); border-radius: 14px; background: var(--zolty); display: grid; place-items: center; font-size: 44px; font-weight: 900; }
+.ekran h1 { font-size: 26px; margin: 0 0 10px; }
+.ekran p { color: var(--szary); margin: 0 auto; max-width: 32ch; }
+.ekran.blad .znak { background: #fbdcd9; border-color: var(--czerwony); color: var(--czerwony); }
+.ekran.blad h1 { color: var(--czerwony); }
